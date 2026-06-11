@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteo de Grupos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header__badge">🎲</div>
+      <div>
+        <h1>Sorteo de Grupos</h1>
+        <p class="header__subtitle">Asigna grupos a bloques horarios con una tómbola animada</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel" id="panel-groups">
+        <div class="panel__header">
+          <h2>Grupos</h2>
+          <span class="badge" id="groups-count">0</span>
+        </div>
+        <form class="form-row" id="form-group">
+          <input type="text" id="input-group" placeholder="Nombre del grupo" autocomplete="off" required>
+          <button type="submit" class="btn btn--primary">Agregar</button>
+        </form>
+        <ul class="chip-list" id="groups-list"></ul>
+        <p class="hint">Cada grupo se asignará a un bloque disponible.</p>
+      </section>
+
+      <section class="panel" id="panel-days">
+        <div class="panel__header">
+          <h2>Días y bloques</h2>
+          <span class="badge" id="blocks-count">0 bloques</span>
+        </div>
+
+        <form class="form-day" id="form-day">
+          <div class="form-day__row">
+            <label class="form-day__field">
+              <span class="form-day__label">Fecha</span>
+              <input type="date" id="input-day" required>
+            </label>
+            <label class="form-day__field">
+              <span class="form-day__label">Hora inicio</span>
+              <input type="time" id="input-start" value="08:00" required>
+            </label>
+            <label class="form-day__field">
+              <span class="form-day__label">Hora fin</span>
+              <input type="time" id="input-end" value="18:00" required>
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Agregar día con bloques</button>
+        </form>
+
+        <div class="days-list" id="days-list"></div>
+        <p class="hint">Cada bloque dura 40 minutos. Se generan automáticamente entre la hora de inicio y fin.</p>
+      </section>
+    </main>
+
+    <section class="action-bar">
+      <div class="action-bar__info" id="sorteo-info">
+        <span id="summary-text">Agrega grupos y bloques para comenzar</span>
+      </div>
+      <button class="btn btn--sorteo" id="btn-sorteo" disabled>
+        <span class="btn__icon">🎰</span>
+        Iniciar sorteo
+      </button>
+      <button class="btn btn--ghost" id="btn-reset" hidden>Reiniciar</button>
+    </section>
+
+    <!-- Tómbola overlay -->
+    <div class="tombola" id="tombola" hidden>
+      <div class="tombola__backdrop"></div>
+      <div class="tombola__stage">
+        <div class="tombola__drum">
+          <div class="tombola__drum-ring"></div>
+          <div class="tombola__drum-inner">
+            <span class="tombola__name" id="tombola-name">—</span>
+          </div>
+        </div>
+        <p class="tombola__status" id="tombola-status">Preparando tómbola…</p>
+        <div class="tombola__order" id="tombola-order"></div>
+      </div>
+    </div>
+
+    <!-- Calendario resultado -->
+    <section class="calendar-section" id="calendar-section" hidden>
+      <h2 class="calendar-section__title">Calendario asignado</h2>
+      <p class="calendar-section__hint" id="calendar-hint" hidden>Arrastra un grupo a otro bloque para intercambiarlo</p>
+      <div class="calendar" id="calendar"></div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
